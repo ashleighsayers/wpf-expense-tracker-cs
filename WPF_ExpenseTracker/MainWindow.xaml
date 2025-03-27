@@ -1,0 +1,56 @@
+﻿<Window x:Class="WPF_ExpenseTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_ExpenseTracker"
+        mc:Ignorable="d"
+        Title="Expense Tracker" Height="452" Width="509">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="22*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Input fields -->
+        <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Vertical" Width="120" Margin="5,0,0,0">
+                <Label Content=" Date of Expense" FontWeight="Bold" Height="30" />
+                <DatePicker x:Name="dpkDate" Height="30" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="150" Margin="5,0,0,0" >
+                <Label Content="Description" FontWeight="Bold" Height="30" />
+                <TextBox x:Name="txtDescr" Height="30"  />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="80" Margin="5,0,0,0">
+                <Label Content="Amount" FontWeight="Bold" Height="30"  />
+                <TextBox  x:Name="txtAmt" Height="30"  />
+            </StackPanel>
+            <Button Content="Add Expense" FontWeight="Bold" Width="110" Height="30" Margin="5,30,0,0" Click="BtnAddExpense_Click"/>
+        </StackPanel>
+
+        <!-- List Box to display expenses-->
+        <ListBox x:Name="lbxExpenses" Grid.Row="1" Margin="5,5,5,5" MinHeight="280" Grid.ColumnSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}" Width="350" />
+                        <Button Content="&#x274C;" Width="30"  Tag="{Binding}" Click="BtnDeleteExpense_Click"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <!-- Total Expenses -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" Margin="347,5,0,5" Grid.Column="1" Width="83">
+            <TextBlock Text="Total: $" FontSize="15" FontWeight="Bold"/>
+            <TextBlock x:Name="tbkTotalAmt" Text="0.00" FontSize="14" FontWeight="Bold"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
